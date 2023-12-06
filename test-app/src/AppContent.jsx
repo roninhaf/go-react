@@ -14,9 +14,14 @@ export default function AppContent() {
     }
   };
 
+  const anotherFunction = () => {
+    console.log("anotherfunction");
+  };
+
   return (
     <>
       <p>This is the content.</p>
+      <p onMouseEnter={anotherFunction}>This is some text</p>
       <button onClick={fetchList}>Fetch Data</button>
       <ul>
         {users.map((user) => {
