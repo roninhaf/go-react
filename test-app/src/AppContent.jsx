@@ -1,24 +1,31 @@
+import { useEffect, useState } from "react";
+const url = "https://jsonplaceholder.typicode.com/posts";
+
 export default function AppContent() {
-  var myLis = <li>Placeholder</li>;
-  const fetchList = () => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((json) => {
-        myLis = json.map((post) => {
-          <li key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-          </li>;
-          console.log(myLis);
-        });
-      });
-  };
+  const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+    const fetchList = async () => {
+      try {
+        const response = await fetch(url);
+        const users = await response.json();
+        setUsers(users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    // fetchList();
+  // }, []);
 
   return (
     <>
       <p>This is the content.</p>
       <button onClick={fetchList}>Fetch Data</button>
-      <ul>{myLis}</ul>
+      <ul>
+        {users.map((user) => {
+          return <li key={user.id}>{user.title}</li>;
+        })}
+      </ul>
     </>
   );
 }
