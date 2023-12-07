@@ -14,18 +14,25 @@ export default function AppContent() {
     }
   };
 
-  const anotherFunction = () => {
-    console.log("anotherfunction");
-  };
+  function idOfUser(userId) {
+    console.log(userId);
+  }
 
   return (
     <>
       <p>This is the content.</p>
-      <p onMouseEnter={anotherFunction}>This is some text</p>
+      <p>There are {users.length} users.</p>
       <button onClick={fetchList}>Fetch Data</button>
+
       <ul>
         {users.map((user) => {
-          return <li key={user.id}>{user.title}</li>;
+          return (
+            <li key={user.id}>
+              <a href="#!" onClick={() => idOfUser(user.id)}>
+                {user.title}
+              </a>
+            </li>
+          );
         })}
       </ul>
     </>
